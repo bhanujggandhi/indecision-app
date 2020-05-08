@@ -1,17 +1,26 @@
 import React, { Component } from 'react';
 
 class AddOption extends Component {
+	constructor(props) {
+		super(props);
+		this.handleAddOption = this.handleAddOption.bind(this);
+		this.state = {
+			error: undefined
+		};
+	}
 	handleAddOption(event) {
 		event.preventDefault();
 		const newValue = event.target.elements.option.value.trim();
-		if (newValue) {
-			alert('aa gyi hai');
-			event.target.elements.option.value = '';
-		}
+		const error = this.props.handleAddOption(newValue);
+		this.setState(() => {
+			return { error };
+		});
+		event.target.elements.option.value = '';
 	}
 	render() {
 		return (
 			<div>
+				{this.state.error && <p>{this.state.error}</p>}
 				<form onSubmit={this.handleAddOption}>
 					<input type="text" name="option" />
 					<button>Add Option</button>
