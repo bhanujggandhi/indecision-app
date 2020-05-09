@@ -28,7 +28,7 @@ class App extends Component {
 			//do nothing
 		}
 	}
-	componentDidUpdate(prevState) {
+	componentDidUpdate(prevProps, prevState) {
 		if (prevState.option.length !== this.state.option.length) {
 			const json = JSON.stringify(this.state.option);
 			localStorage.setItem('options', json);
