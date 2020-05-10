@@ -3,12 +3,14 @@ import Header from './Header';
 import Action from './Action';
 import Options from './Options';
 import AddOptions from './AddOption';
+import OptionModal from './OptionModal';
 // import { render } from '@testing-library/react';
 
 class Indecision extends Component {
 	state = {
-		option: []
-	}
+		option: [],
+		selectedOption: undefined
+	};
 	componentDidMount() {
 		try {
 			const json = localStorage.getItem('options');
@@ -28,7 +30,10 @@ class Indecision extends Component {
 	}
 	handlePick = () => {
 		let randomNum = Math.floor(Math.random() * this.state.option.length);
-		alert(this.state.option[randomNum]);
+		const ranOption = this.state.option[randomNum];
+		this.setState(() => ({
+			selectedOption: ranOption
+		}));
 	};
 	handleRemoveOption = (optionToRemove) => {
 		this.setState((prevValue) => ({
@@ -46,6 +51,11 @@ class Indecision extends Component {
 		}
 		this.setState((prevValue) => ({ option: [ ...prevValue.option, option ] }));
 	};
+	handleOkay = () => {
+		this.setState(() => ({
+			selectedOption: undefined
+		}));
+	};
 	render() {
 		const subtitle = 'Put your life in the hands of computer.';
 		return (
@@ -58,6 +68,7 @@ class Indecision extends Component {
 					handleDeleteOption={this.handleDeleteOption}
 				/>
 				<AddOptions handleAddOption={this.handleAddOption} />
+				<OptionModal selectedOption={this.state.selectedOption} handleOkay={this.handleOkay} />
 			</div>
 		);
 	}
