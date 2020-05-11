@@ -63,12 +63,14 @@ class Indecision extends Component {
 				<Header subtitle={subtitle} />
 				<div className="container">
 					<Action handlePick={this.handlePick} hasOptions={this.state.option.length > 0} />
-					<Options
-						options={this.state.option}
-						handleRemoveOption={this.handleRemoveOption}
-						handleDeleteOption={this.handleDeleteOption}
-					/>
-					<AddOptions handleAddOption={this.handleAddOption} />
+					<div className="widget">
+						<Options
+							options={this.state.option}
+							handleRemoveOption={this.handleRemoveOption}
+							handleDeleteOption={this.handleDeleteOption}
+						/>
+						<AddOptions handleAddOption={this.handleAddOption} />
+					</div>
 				</div>
 				<OptionModal selectedOption={this.state.selectedOption} handleOkay={this.handleOkay} />
 			</div>
